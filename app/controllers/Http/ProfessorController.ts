@@ -1,6 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Professor from 'app/models/Professor'
-import  ProfessorValidator  from 'app/validator/ProfessorValidator'
+import Professor from 'App/models/Professor'
+import ProfessorValidator from 'App/validator/ProfessorValidator'
 
 export default class ProfessorController {
   public async store({ request, response }: HttpContextContract) {
@@ -21,6 +21,7 @@ export default class ProfessorController {
         data: professor
       })
     } catch (error) {
+      console.error(error);
       if (error.messages) {
         return response.status(422).send({
           message: "Validation failed",
