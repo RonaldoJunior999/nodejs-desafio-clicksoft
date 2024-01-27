@@ -18,8 +18,20 @@
 |
 */
 
+import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+Route.group(()=>{
+  Route.get('/', async () => {
+    return { hello: 'world teste' }
+  })
+  Route.get('/health', async ({response}) => {
+    const report = await HealthCheck.getReport()
+    return report.healthy
+      ? response.ok(report)
+      : response.badRequest(report)
+  })
+  Route.resource("/students", "StudantsController").apiOnly()
+  Route.resource("/professor", "ProfessorController").apiOnly()
+  
+}).prefix('/api')
