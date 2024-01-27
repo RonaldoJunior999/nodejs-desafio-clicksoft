@@ -7,10 +7,10 @@ export default class ProfessorController {
     try {
       const body = await request.validate({ schema: ProfessorValidator })
 
-      const studentEmailExist = await Professor.findBy('email', body.email)
-      const studentRegistrationExist = await Professor.findBy('number_registration', body.number_registration)
+      const professorEmailExist = await Professor.findBy('email', body.email)
+      const professorRegistrationExist = await Professor.findBy('number_registration', body.number_registration)
 
-      if (studentEmailExist || studentRegistrationExist) {
+      if (professorEmailExist || professorRegistrationExist) {
         return response.status(409).send({ message: "Professor already exists!" })
       }
 
