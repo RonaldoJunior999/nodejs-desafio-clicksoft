@@ -7,10 +7,9 @@ export default class ClassroomController {
   public async store({ request, params, response }: HttpContextContract) {
     try {
       await request.validate({ schema: ClassroomValidator })
-
       const body = request.body()
       const registration = params.registration
-      const professor = await Professors.findBy('registration_number', registration)
+      const professor = await Professors.findBy('number_registration', registration)
 
       if (!professor) {
         return response.status(404).send({ message: "not found professor" })
@@ -62,9 +61,9 @@ export default class ClassroomController {
         }
     }
     public async show({params, response}:HttpContextContract){
-        const {registration, roomNumber} = params
+        const {registration, classroomNumber} = params
         const professor = await Professors.findBy('number_registration', registration);
-        const classroom = await Classroom.findBy('number_classroom', roomNumber)
+        const classroom = await Classroom.findBy('number_classroom', classroomNumber)
         if(!classroom){
             return response.status(404).send({message: "not found room"})
         }
