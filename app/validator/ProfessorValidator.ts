@@ -7,7 +7,7 @@ export default schema.create({
   email: schema.string({}, [
     rules.email(),
   ]),
-  number_registration: schema.string(),
+  numer_registration: schema.string(),
   birth_date: schema.date(),
 }) 
 

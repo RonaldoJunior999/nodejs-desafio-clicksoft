@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Professors extends BaseModel {
+export default class professors extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -12,7 +12,7 @@ export default class Professors extends BaseModel {
   public email: string
 
   @column()
-  public number_registration: string
+  public numer_registration: string
 
   @column.dateTime()
   public birth_date: DateTime
@@ -21,5 +21,17 @@ export default class Professors extends BaseModel {
   public created_at: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public update_at: DateTime
+  public updated_at: DateTime
+
+  public serialize() {
+    return {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      number_registration: this.numer_registration,
+      birth_date: this.birth_date.toFormat('yyyy-MM-dd'),
+      created_at: this.created_at.toISO(),
+      updated_at: this.updated_at.toISO(),
+    };
+  }
 }

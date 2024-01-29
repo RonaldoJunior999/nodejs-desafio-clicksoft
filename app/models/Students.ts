@@ -21,5 +21,18 @@ export default class Students extends BaseModel {
   public created_at: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public update_at: DateTime
+  public updated_at: DateTime
+
+  public serialize() {
+    return {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      number_registration: this.number_registration,
+      birth_date: this.birth_date.toFormat('yyyy-MM-dd'),
+      created_at: this.created_at.toISO(),
+      updated_at: this.updated_at.toISO(),
+    };
+  }
 }
+

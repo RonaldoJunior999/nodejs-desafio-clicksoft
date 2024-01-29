@@ -5,45 +5,45 @@ import Classroom from 'App/models/classroom';
 import Students from 'App/models/Students';
 import AllotmentValidator from 'App/validator/AllotmentValidator';
 
-export default class AllocationsController {
+export default class AllotmentController {
     public async store({request, response}:HttpContextContract){
         try{
         const body= request.body()
-        const professors = await Professors.findBy('number_registration', body.registration_professor);
+        const professors = await Professors.findBy('numer_registration', body.registration_professor);
         const classroom = await Classroom.findBy('number_classroom', body.number_classroom);
         const student = await Students.findBy('email', body.email_student);
         if(!professors){
-          return response.status(404).send({message: "not found professor"})
+          return response.status(404).send({message: "Professor not found"})
         }
         if(!classroom){
-          return response.status(404).send({message: "not found room"})
+          return response.status(404).send({message: "Classroom not found"})
         }
         if(!student){
-          return response.status(404).send({message: "not found student"})
+          return response.status(404).send({message: "Student not found"})
         }
         if(classroom.avaliation === false){
-            return response.status(401).send({message: "it is not possible to relocate students in this classroom"})
+            return response.status(401).send({message: "it's impossible to relocate students in this classroom"})
         }
         
-        const totalAllotmentInClassroom = await Allotment.query().where('room_id', classroom.id).count('id as count');
+        const totalAllotmentInClassroom = await Allotment.query().where('classroom_id', classroom.id).count('id as count');
         const totalStudentsInClassroom = totalAllotmentInClassroom[0].$extras.count;
         if (totalStudentsInClassroom >= classroom.capacity) {
-          return response.status(409).send({ message: 'Room capacity exceeded' });
+          return response.status(409).send({ message: 'Classroom capacity exceded' });
         }
         
         const allotmentStudent = await Allotment.query()
         .where('student_id', student.id)
-        .where('room_id', classroom.id)
+        .where('classroom_id', classroom.id)
         .first();
 
         if(classroom.professor_id !== professors.id){
-            return response.status(401).send({message: "teacher is not the owner of this room"})
+            return response.status(401).send({message: "The teacher is not responsible for this classroom"})
         }
         if (allotmentStudent) {
-        return response.status(409).send({ message: "student already in this classroom" });
+        return response.status(409).send({ message: "student already exists in this classroom" });
         }
 
-        const createAllotment = {professor_id: professors.id, room_id: classroom.id, student_id: student.id}
+        const createAllotment = {professor_id: professors.id, classroom_id: classroom.id, student_id: student.id}
         const allotment = await Allotment.create(createAllotment)
 
         response.status(201)
@@ -62,7 +62,7 @@ export default class AllocationsController {
         try{
         await request.validate({ schema: AllotmentValidator })
         const classroom = await Classroom.findBy('number_classroom', params.number_classroom);
-        const professors = await Professors.findBy('number_registration', params.registration);
+        const professors = await Professors.findBy('numer_registration', params.registration);
         if(!professors){
           return response.status(404).send({message: "not found room"})
         }
@@ -71,7 +71,7 @@ export default class AllocationsController {
         }
         const student = await Allotment.query()
         .where('student_id',params.idStudent)
-        .where('room_id', classroom.id)
+        .where('classroom_id', classroom.id)
         .first();
 
         if (!student) {
@@ -93,18 +93,18 @@ export default class AllocationsController {
         return response.status(500).send({ message: "Internal Server Error" })
       }
     }
-    public async index({ params, response, request}: HttpContextContract) {
+    public async index({ params, response}: HttpContextContract) {
     try{
-      await request.validate({ schema: AllotmentValidator })
+      //await request.validate({ schema: AllotmentValidator })
       const classroom = await Classroom.findBy('number_classroom', params.classroom);
-      const professors = await Professors.findBy('number_registration', params.registration);
+      const professors = await Professors.findBy('numer_registration', params.registration);
       if (!classroom || classroom.professor_id !== professors?.id) {
-      return response.status(404).send({message: 'Room not found'});
+      return response.status(404).send({message: 'Classoom not found'});
       }
       if (!professors) {
         return response.status(404).send({message: 'Professor not found'});
       }
-      const classroomStudents = await Allotment.query().where('room_id', classroom.id).where('professor_id', professors.id).preload('students');
+      const classroomStudents = await Allotment.query().where('classroom_id', classroom.id).where('professor_id', professors.id).preload('students');
       const students = classroomStudents.map((allotment) => allotment.students);
       
       response.status(201)

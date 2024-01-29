@@ -1,5 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Professors from 'App/models/Professor'
+import professors from 'App/models/Professor'
 import Classroom from 'App/models/classroom'
 import ClassroomValidator from 'App/validator/ClassroomValidator'
 
@@ -9,10 +9,10 @@ export default class ClassroomController {
       await request.validate({ schema: ClassroomValidator })
       const body = request.body()
       const registration = params.registration
-      const professor = await Professors.findBy('number_registration', registration)
+      const professor = await professors.findBy('numer_registration', registration)
 
       if (!professor) {
-        return response.status(404).send({ message: "not found professor" })
+        return response.status(404).send({ message: "Professor not found" })
       }
 
       const existingRoom = await Classroom.query()
@@ -21,7 +21,7 @@ export default class ClassroomController {
         .first()
 
       if (existingRoom) {
-        return response.status(409).send({ message: "The professor already has a room with this number" })
+        return response.status(409).send({ message: "Register professor already exists" })
       }
 
       const createClassRoom = { ...body, professor_id: professor.id }
@@ -42,7 +42,7 @@ export default class ClassroomController {
   
     public async destroy({params, response}:HttpContextContract){
         const {registration, classroomNumber} = params
-        const professor = await Professors.findBy('number_registration', registration);
+        const professor = await professors.findBy('numer_registration', registration);
         const classroom = await Classroom.findBy('number_classroom', classroomNumber)
         if(!professor){
             return response.status(404).send({message: "not found professor"})
@@ -51,24 +51,24 @@ export default class ClassroomController {
             return response.status(404).send({message: "not found room"})
         }
         if(professor.id !== classroom.professor_id){
-            response.status(401).send({message: "this room does not belong to you"})
+            response.status(401).send({message: "You are not registered in this classroom"})
             return
         } 
         await classroom.delete()
         return {
-            message: "room deleted successfully",
+            message: "Classroom deleted successfully",
             data: classroom,
         }
     }
     public async show({params, response}:HttpContextContract){
         const {registration, classroomNumber} = params
-        const professor = await Professors.findBy('number_registration', registration);
+        const professor = await professors.findBy('numer_registration', registration);
         const classroom = await Classroom.findBy('number_classroom', classroomNumber)
         if(!classroom){
-            return response.status(404).send({message: "not found room"})
+            return response.status(404).send({message: "Classroom not found"})
         }
         if(!professor){
-            return response.status(404).send({message: "not found professor"})
+            return response.status(404).send({message: "Professor not found"})
         }
         if(professor.id !== classroom.professor_id){
             response.status(401).send({message: "unauthorized access"})
@@ -86,15 +86,15 @@ export default class ClassroomController {
           const body = request.body()
           const { registration, classroomNumber } = params
     
-          const professor = await Professors.findBy('number_registration', registration)
+          const professor = await professors.findBy('numer_registration', registration)
           const classroom = await Classroom.findBy("number_classroom", classroomNumber)
     
           if (!professor) {
-            return response.status(404).send({ message: "not found professor" })
+            return response.status(404).send({ message: "Professor not found" })
           }
     
           if (!classroom) {
-            return response.status(404).send({ message: "not found room" })
+            return response.status(404).send({ message: "Classroom not found" })
           }
     
           if (professor.id !== classroom.professor_id) {

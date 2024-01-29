@@ -33,5 +33,18 @@ Route.group(()=>{
   })
   Route.resource("/students", "StudantsController").apiOnly()
   Route.resource("/professor", "ProfessorController").apiOnly()
+  Route.post("/classroom/:registration/professor", "ClassroomController.store")
+  Route.put("/classroom/:registration/professor/:classroomNumber", "ClassroomController.update")
+  Route.delete("/classroom/:registration/professor/:classroomNumber", "ClassroomController.destroy")
+  Route.get("/classroom/:registration/professor/:classroomNumber", "ClassroomController.show")
+
+  Route.get("/allotment/professor/:registration/classroom/:classroom", "AllotmentController.index")
+  Route.resource("/allotment/professor/", "AllotmentController").apiOnly()
+  Route.delete("/allotment/professor/:registration/student/:idStudent/classroom/:number_classroom", "AllotmentController.destroy")
+  Route.get('/students/:registration/allotment', 'StudantsController.showAllotment');
+
+
+
+
   
 }).prefix('/api')
