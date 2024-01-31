@@ -57,7 +57,7 @@ export default class StudantsController {
       const studant = await Students.findBy('number_registration', params.id)
 
       if (!studant) {
-        return response.status(404).send({ message: "Professor Not Found" })
+        return response.status(404).send({ message: "Student Not Found" })
       }
 
       await studant.delete()
