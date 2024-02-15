@@ -232,7 +232,7 @@ ________________________________________________________________________________
 }
 _____________________________________________________________________________________
 
-### RF06 - Permitir que professor edite os dados de uma sala
+### RF10 - Permitir que professor edite os dados de uma sala
 * Método PUT <br/>
 Rota: /api/classroom/:registration/professor/:classroomNumber<br/>
 Exemplo: no insomnia, mude a requisição de "Body" para "JSON"<br/>
@@ -260,6 +260,73 @@ ________________________________________________________________________________
 ____________________________________________________________________________________
 }
 
+### RF011 - Permitir que professor exclua os dados de uma sala
+* Método DELETE
+Rota: /api/classroom/:registration/professor/:classroomNumber<br/>
+Exemplo: no insomnia, mantenha a requisição no "Body"<br/>
+/api/classroom/937/professor/25<br/>
+_________________________________________________________________________________
+{<br/>
+	  "number_classroom": "02",<br/>
+	  "capacity": 6,<br/>
+	  "avaliation": false<br/>
+	}<br/>
+__________________________________________________________________________________
+No preview deve mostrar a seguinte mensagem<br/>
+{<br/>
+	"message": "room deleted successfully",<br/>
+__________________________________________________________________________________
+	"data": {
+		"id": 1,
+		"number_classroom": "25",
+		"capacity": 6,
+		"avaliation": false,
+		"professor_id": 4,
+		"created_at": "2024-01-29T15:04:54.362-04:00",
+		"updated_at": "2024-01-29T16:05:57.379-04:00"
+	}
+___________________________________________________________________________________
+}<br/>
+
+### RF12: Permitir que professor consulte os dados de uma sala
+* Método GET
+Rota: /api/classroom/:registration/professor/:classroomNumber<br/>
+Exemplo: no insomnia<br/>
+GET /api/classroom/937/professor/25<br/>
+===================================================================================
+
+### RF13 - Permitir que professor aloque um aluno em uma sala
+* Método POST
+Rota: /api/allotment/professor/ <br/>
+Exemplo: no insomnia, mude a requisição de "Body" para "JSON" <br/>
+________________________________________________________________________________________
+   {
+	  "number_classroom": "25",
+	  "registration_professor": "937",
+	  "email_student": "rr@gnail.com"
+	}
+_______________________________________________________________________________________
+
+### RF014 - Permitir que professor remova o aluno de uma sala
+* Método DELETE
+Rota: /api/allotment/professor/:registration/student/:idStudent/classroom/:number_classroom<br/>
+Exemplo: no insomnia, mantenha a requisição no "Body"<br/>
+DELETE /api/allotment/professor/937/student/2700/classroom/25<br/>
+______________________________________________________________________________________
+
+### RF15: Permitir que professor consulte todos os alunos de uma sala
+* Método GET
+Rota: /api/allotment/professor/:registration/classroom/:classroom<br/>
+Exemplo: no insomnia<br/>
+GET api/allotment/professor/937/classroom/25<br/>
+______________________________________________________________________________________
+
+### RF16: Permitir que aluno consulte todas as salas que deverá comparecer
+* Método GET
+Rota: /students/:registration/allotment<br/>
+Exemplo: no insomnia<br/>
+GET api/students/555/allotment<br/>
+_____________________________________________________________________________________
 ## Autor
 
 Ronaldo Júnior - [Linkedin](https://www.linkedin.com/in/ronaldo-junior-5015rj/) - ron.junior1705@gmail.com
