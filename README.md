@@ -105,3 +105,8 @@ ________________________________________________________________________________
 __________________________________________________________________________________
 }<br/>
 
+## Autor
+
+Ronaldo Júnior - [Linkedin](https://www.linkedin.com/in/ronaldo-junior-5015rj/) - ron.junior1705@gmail.com
+
+Meu GitHub: [Github](https://github.com/RonaldoJunior999)
