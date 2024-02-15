@@ -14,9 +14,9 @@
 Rota: /api/students <br/>
 Exemplo: no insomnia, mude a requisição de "Body" para "JSON" <br/>
 model body: {<br/>
-	"name": "Ronaldo", 
-	"email": "ronaldo.junior@gnail.com",
-	"number_registration": "5555",
+	"name": "Ronaldo", <br/>
+	"email": "ronaldo.junior@gnail.com",<br/>
+	"number_registration": "5555",<br/>
 	"birth_date": "1999-12-04"  
 }<br/>
 No preview deve mostrar a seguinte mensagem
