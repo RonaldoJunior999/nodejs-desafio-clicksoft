@@ -37,17 +37,20 @@ model body: {<br/>
 }<br/>
 _____________________________________________________________________________________
 ### RF02 - Permitir que aluno edite seus dados de cadastro
-* Método PUT
-Rota: /api/students/:registrationStudent
-Exemplo: no insomnia, mude a requisição de "Body" para "JSON"
-/api/students/5555
+* Método PUT <br/>
+Rota: /api/students/:registrationStudent<br/>
+Exemplo: no insomnia, mude a requisição de "Body" para "JSON"<br/>
+/api/students/5555<br/>
+_____________________________________________________________________________________
 {
-	"name": "eliana xavier",
-	"email": "eliana@gnail.com",
-	"number_registration": "2700",
-	"birth_date": "1999-05-28" 
+	"name": "eliana xavier",<br/>
+	"email": "eliana@gnail.com",<br/>
+	"number_registration": "2700",<br/>
+	"birth_date": "1999-05-28" <br/>
 }
-No preview deve mostrar a seguinte mensagem
+_____________________________________________________________________________________
+No preview deve mostrar a seguinte mensagem <br/>
+_____________________________________________________________________________________
 {
 	"message": "Updated",
 	"data": {
@@ -60,7 +63,7 @@ No preview deve mostrar a seguinte mensagem
 		"updated_at": "2024-01-31T15:30:43.724-04:00"
 	}
 }
-
+___________________________________________________________________________________
 ### RF04: Permitir que aluno consulte seus dados de cadastro
 - Método GET
 Rota: /api/students/:registrationStudent
