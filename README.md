@@ -2,10 +2,10 @@
 ## Sobre o projeto
 - Gerenciar alunos e professores em alocações de sala de aula
 ### Informações sobre a execução deste projeto
-- Framework - Adonis Versão 5
-- API - Node Versão 18
-- Banco de Dados - Relacional PostgresSQL
-- Teste de API - Insomnia
+- Framework - Adonis Versão 5 [Adonis-url]: https://v5-docs.adonisjs.com/guides/introduction
+- API - Node Versão 18 [Node-url]: https://nodejs.org/en
+- Banco de Dados - Relacional PostgresSQL [PostgreSQL-url]: https://www.postgresql.org/download/
+- Teste de API - Insomnia [Insomnia-url]: https://insomnia.rest/download
 - Outros métodos de execução - Docker,  Docker-compose (já pré configurado)
 
 - Node.js instalado em sua máquina.
