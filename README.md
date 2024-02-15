@@ -239,13 +239,11 @@ Exemplo: no insomnia, mude a requisição de "Body" para "JSON"<br/>
 /api/classroom/937/professor/25<br/>
 _____________________________________________________________________________________
 body: 
-_____________________________________________________________________________________
-{
-	  "number_classroom": "02",
-	  "capacity": 6,
-	  "avaliation": false
-	}
-_____________________________________________________________________________________
+{<br/>
+	  "number_classroom": "02",<br/>
+	  "capacity": 6,<br/>
+	  "avaliation": false<br/>
+	}<br/>
 No preview deve mostrar a seguinte mensagem <br/>
 _____________________________________________________________________________________
 {
