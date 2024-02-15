@@ -13,14 +13,14 @@
 * Método POST
 Rota: /api/students <br/>
 Exemplo: no insomnia, mude a requisição de "Body" para "JSON" <br/>
-{
+model body: {
 	"name": "Ronaldo",
 	"email": "ronaldo.junior@gnail.com",
 	"number_registration": "5555",
 	"birth_date": "1999-12-04"  
 }
 No preview deve mostrar a seguinte mensagem
-{
+model body: {
 	"message": "Studant created",
 	"data": {
 		"id": 2,
@@ -34,7 +34,7 @@ No preview deve mostrar a seguinte mensagem
 }
 
 ### RF02 - Permitir que aluno edite seus dados de cadastro
-- Método PUT
+* Método PUT
 Rota: /api/students/:registrationStudent
 Exemplo: no insomnia, mude a requisição de "Body" para "JSON"
 /api/students/5555
