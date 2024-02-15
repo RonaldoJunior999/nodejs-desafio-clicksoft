@@ -19,19 +19,19 @@ model body: {<br/>
 	"number_registration": "5555",<br/>
 	"birth_date": "1999-12-04"  
 }<br/>
-No preview deve mostrar a seguinte mensagem
-model body: {
-	"message": "Studant created",
-	"data": {
-		"id": 2,
-		"name": "Ronaldo",
-		"email": "ronaldo.junior@gnail.com",
-		"number_registration": "5555",
-		"birth_date": "1999-12-04",
-		"created_at": "2024-01-31T15:25:48.230-04:00",
-		"updated_at": "2024-01-31T15:25:48.231-04:00"
-	}
-}
+No preview deve mostrar a seguinte mensagem <br/>
+model body: {<br/>
+	"message": "Studant created",<br/>
+	"data": {<br/>
+		"id": 2,<br/>
+		"name": "Ronaldo",<br/>
+		"email": "ronaldo.junior@gnail.com",<br/>
+		"number_registration": "5555",<br/>
+		"birth_date": "1999-12-04",<br/>
+		"created_at": "2024-01-31T15:25:48.230-04:00",<br/>
+		"updated_at": "2024-01-31T15:25:48.231-04:00"<br/>
+	}<br/>
+}<br/>
 
 ### RF02 - Permitir que aluno edite seus dados de cadastro
 * Método PUT
