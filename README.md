@@ -232,6 +232,32 @@ ________________________________________________________________________________
 }
 _____________________________________________________________________________________
 
+### RF06 - Permitir que professor edite os dados de uma sala
+* Método PUT <br/>
+Rota: /api/classroom/:registration/professor/:classroomNumber<br/>
+Exemplo: no insomnia, mude a requisição de "Body" para "JSON"<br/>
+/api/classroom/937/professor/25<br/>
+_____________________________________________________________________________________
+{
+	  "number_classroom": "02",
+	  "capacity": 6,
+	  "avaliation": false
+	}
+_____________________________________________________________________________________
+No preview deve mostrar a seguinte mensagem <br/>
+_____________________________________________________________________________________
+{
+	"message": "updated",
+	"data": {
+		"id": 1,
+		"capacity": 6,
+		"avaliation": false,
+		"professor_id": 4,
+		"created_at": "2024-01-29T15:04:54.362-04:00",
+		"updated_at": "2024-01-29T16:05:57.379-04:00"
+	}
+}
+___________________________________________________________________________________
 
 ## Autor
 
