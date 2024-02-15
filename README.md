@@ -301,9 +301,9 @@ Rota: /api/allotment/professor/ <br/>
 Exemplo: no insomnia, mude a requisição de "Body" para "JSON" <br/>
 ________________________________________________________________________________________
    {
-	  "number_classroom": "25",
-	  "registration_professor": "937",
-	  "email_student": "rr@gnail.com"
+	  "number_classroom": "25",<br/>
+	  "registration_professor": "937",<br/>
+	  "email_student": "rr@gnail.com"<br/>
 	}
 _______________________________________________________________________________________
 
