@@ -125,7 +125,7 @@ ________________________________________________________________________________
 __________________________________________________________________________________
 }<br/>
 
-===================================================================================
+## Utilização da API na prática para rota de Professores
 ### RF05 - Permitir que professor se cadastre na aplicação
 * Método POST
 Rota: /api/professor <br/>
@@ -221,8 +221,8 @@ ________________________________________________________________________________
 	}
 __________________________________________________________________________________
 }<br/>
-==================================================================================
 
+## Utilização da API na prática para rota de salas de aula
 ### RF09 - Permitir que professor cadastre nova sala
 * Método POST
 Rota: /api/classroom/:registration/professor <br/>
@@ -313,8 +313,8 @@ ________________________________________________________________________________
 Rota: /api/classroom/:registration/professor/:classroomNumber<br/>
 Exemplo: no insomnia<br/>
 GET /api/classroom/937/professor/25<br/>
-===================================================================================
 
+## Utilização da API na prática para rota de Alocaçãoo
 ### RF13 - Permitir que professor aloque um aluno em uma sala
 * Método POST
 Rota: /api/allotment/professor/ <br/>
