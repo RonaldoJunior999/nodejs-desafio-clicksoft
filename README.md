@@ -12,7 +12,7 @@
 ### RF01 - Permitir que aluno se cadastre na aplicação
 * Método POST
 Rota: /api/students <br/>
-Exemplo: no insomnia, mude a requisição de "Body" para "JSON"
+Exemplo: no insomnia, mude a requisição de "Body" para "JSON" <br/>
 {
 	"name": "Ronaldo",
 	"email": "ronaldo.junior@gnail.com",
