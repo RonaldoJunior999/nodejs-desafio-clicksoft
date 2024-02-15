@@ -65,24 +65,25 @@ ________________________________________________________________________________
 }<br/>
 ___________________________________________________________________________________
 ### RF04: Permitir que aluno consulte seus dados de cadastro
-- Método GET
-Rota: /api/students/:registrationStudent
-Exemplo: no insomnia, mantenha a requisição no "Body"
-/api/students/2700
-No preview deve mostrar a seguinte mensagem
-{
-	"message": "Sucessful",
-	"data": {
-		"id": 2,
-		"name": "eliana xavier",
-		"email": "eliana@gnail.com",
-		"number_registration": "2700",
-		"birth_date": "1999-05-28",
-		"created_at": "2024-01-31T15:25:48.230-04:00",
-		"updated_at": "2024-01-31T15:30:43.724-04:00"
-	}
-}
-
+* Método GET
+Rota: /api/students/:registrationStudent<br/>
+Exemplo: no insomnia, mantenha a requisição no "Body"<br/>
+/api/students/2700<br/>
+No preview deve mostrar a seguinte mensagem<br/>
+{<br/>
+___________________________________________________________________________________
+	"message": "Sucessful",<br/>
+	"data": {<br/>
+		"id": 2,<br/>
+		"name": "eliana xavier",<br/>
+		"email": "eliana@gnail.com", <br/>
+		"number_registration": "2700", <br/>
+		"birth_date": "1999-05-28", <br/>
+		"created_at": "2024-01-31T15:25:48.230-04:00",<br/>
+		"updated_at": "2024-01-31T15:30:43.724-04:00"<br/>
+	}<br/>
+}<br/>
+___________________________________________________________________________________
 ### RF03 - Permitir que aluno exclua seus dados de cadastro
 - Método DELETE
 Rota: /api/students/:registrationStudent
