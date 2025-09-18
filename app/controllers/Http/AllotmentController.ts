@@ -1,16 +1,56 @@
-import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import {
+  CreateAllotmentValidator,
+  DeleteAllotmentValidator,
+  ListAllotmentValidator,
+} from 'App/Validators/AllotmentValidator'
 import AllotmentService from 'App/Services/AllotmentService'
 
-export default class AllotmentController {
+export default class AllotmentsController {
+  /**
+   * POST /allotments
+   * Cria um novo vínculo (professor -> turma -> aluno)
+   */
   public async store(ctx: HttpContextContract) {
+    const { request } = ctx
+
+    // valida body
+    await request.validate(CreateAllotmentValidator)
+
     return AllotmentService.createAllotment(ctx)
   }
 
+  /**
+   * DELETE /allotments/:registration/:classroom/:idStudent
+   * Remove aluno da turma
+   */
   public async destroy(ctx: HttpContextContract) {
+    const { request, params } = ctx
+
+    // valida params como se fosse body
+    await request.validate({
+      schema: new DeleteAllotmentValidator(ctx).schema,
+      data: params,
+      messages: new DeleteAllotmentValidator(ctx).messages,
+    })
+
     return AllotmentService.deleteAllotment(ctx)
   }
 
+  /**
+   * GET /allotments/:registration/:classroom
+   * Lista alunos da turma
+   */
   public async index(ctx: HttpContextContract) {
+    const { request, params } = ctx
+
+    // valida params
+    await request.validate({
+      schema: new ListAllotmentValidator(ctx).schema,
+      data: params,
+      messages: new ListAllotmentValidator(ctx).messages,
+    })
+
     return AllotmentService.listAllotments(ctx)
   }
 }
