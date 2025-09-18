@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, BelongsTo, belongsTo, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Professors from './Professor'
-import Classroom from './classroom'
+import Classroom from './Classroom'
 import Students from './Students'
 
 export default class Allotment extends BaseModel {

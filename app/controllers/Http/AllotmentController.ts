@@ -1,9 +1,27 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Allotment from 'App/models/Allotmet';
-import Professors from 'App/models/Professor';
-import Classroom from 'App/models/classroom';
-import Students from 'App/models/Students';
-import AllotmentValidator from 'App/validator/AllotmentValidator';
+import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import AllotmentService from 'App/Services/AllotmentService'
+
+export default class AllotmentController {
+  public async store(ctx: HttpContextContract) {
+    return AllotmentService.createAllotment(ctx)
+  }
+
+  public async destroy(ctx: HttpContextContract) {
+    return AllotmentService.deleteAllotment(ctx)
+  }
+
+  public async index(ctx: HttpContextContract) {
+    return AllotmentService.listAllotments(ctx)
+  }
+}
+
+
+/*import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Allotment from 'App/Models/Allotmet';
+import Professors from 'App/Models/Professor';
+import Classroom from 'App/Models/Classroom';
+import Students from 'App/Models/Students';
+import AllotmentValidator from 'App/Validators/AllotmentValidator';
 
 export default class AllotmentController {
     public async store({request, response}:HttpContextContract){
@@ -120,4 +138,4 @@ export default class AllotmentController {
       }
     }
 }
-
+*/

@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.string('name')
       table.string('email').unique()
       table.string('number_registration').unique()
+       table.string('password')
       table.dateTime('birth_date')
 
       /**

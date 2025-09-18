@@ -2,14 +2,15 @@
 
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
-export default schema.create({
-  name: schema.string(),
-  email: schema.string({}, [
-    rules.email(),
-  ]),
-  numer_registration: schema.string(),
-  birth_date: schema.date(),
-}) 
+export default class ProfessorValidator {
+  public schema = schema.create({
+    name: schema.string(),
+    email: schema.string({}, [rules.email()]),
+    numer_registration: schema.string(),
+    birth_date: schema.date(),
+    password: schema.string({}, [rules.minLength(6)]), 
+  })
+}
 
 
 /*import { schema, rules, ParsedTypedSchema } from '@ioc:Adonis/Core/Validator'

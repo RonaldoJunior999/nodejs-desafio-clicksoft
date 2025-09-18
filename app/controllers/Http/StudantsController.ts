@@ -1,7 +1,161 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Allotment from 'App/models/Allotmet'
-import Students from 'App/models/Students'
-import StudantValidator from 'App/validator/StudantValidator'
+import { DateTime } from 'luxon'
+import StudentService, { StudentData } from 'App/Services/StudentService'
+import StudantValidator from 'App/Validators/StudantValidator'
+
+export default class StudantsController {
+  private studentService = new StudentService()
+
+  public async store({ request, response }: HttpContextContract) {
+    try {
+      const body = await request.validate(StudantValidator)
+
+      const studentData: StudentData = {
+        ...body,
+        birth_date: body.birth_date instanceof DateTime
+          ? body.birth_date
+          : DateTime.fromJSDate(new Date(body.birth_date)),
+      }
+
+      const student = await this.studentService.registerStudent(studentData)
+
+      return response.status(201).send({
+        message: "Student created successfully",
+        data: student.serialize(),
+      })
+    } catch (error: any) {
+      if (error.messages) {
+        return response.status(422).send({ message: "Validation failed", errors: error.messages })
+      }
+      return response.status(400).send({ message: error.message || "Erro ao criar estudante" })
+    }
+  }
+
+  public async show({ params, response }: HttpContextContract) {
+    try {
+      const student = await this.studentService.getStudent(params.id)
+      if (!student) {
+        return response.status(404).send({ message: "Student not found" })
+      }
+      return { data: student }
+    } catch (error: any) {
+      return response.status(400).send({ message: error.message || "Erro ao buscar estudante" })
+    }
+  }
+
+  public async update({ params, request, response }: HttpContextContract) {
+    try {
+      const body = await request.validate(StudantValidator)
+
+      const studentData: StudentData = {
+        ...body,
+        birth_date: body.birth_date instanceof DateTime
+          ? body.birth_date
+          : DateTime.fromJSDate(new Date(body.birth_date)),
+      }
+
+      const student = await this.studentService.updateStudent(params.id, studentData)
+
+      if (!student) {
+        return response.status(404).send({ message: "Student not found" })
+      }
+
+      return {
+        message: "Student updated successfully",
+        data: student.serialize(),
+      }
+    } catch (error: any) {
+      if (error.messages) {
+        return response.status(422).send({ message: "Validation failed", errors: error.messages })
+      }
+      return response.status(400).send({ message: error.message || "Erro ao atualizar estudante" })
+    }
+  }
+
+  public async destroy({ params, response }: HttpContextContract) {
+    try {
+      const deleted = await this.studentService.deleteStudent(params.id)
+
+      if (!deleted) {
+        return response.status(404).send({ message: "Student not found" })
+      }
+
+      return { message: "Student deleted successfully" }
+    } catch (error: any) {
+      return response.status(400).send({ message: error.message || "Erro ao deletar estudante" })
+    }
+  }
+
+  public async showAllotment({ params, response }: HttpContextContract) {
+    try {
+      const allotmentData = await this.studentService.getStudentAllotment(params.registration)
+
+      if (!allotmentData) {
+        return response.status(404).send({ message: "Student or allotments not found" })
+      }
+
+      return allotmentData
+    } catch (error: any) {
+      return response.status(400).send({ message: error.message || "Erro ao buscar allotments" })
+    }
+  }
+}
+
+
+
+/*import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { DateTime } from 'luxon'
+import StudentService, { StudentData } from 'App/Services/StudentService'
+import StudantValidator from 'App/Validators/StudantValidator'
+
+export default class StudantsController {
+  private studentService = new StudentService()
+
+  public async store({ request, response }: HttpContextContract) {
+    try {
+      // Valida os dados do request
+      const body = await request.validate(StudantValidator)
+
+      // Prepara dados para o service
+      const studentData: StudentData = {
+        ...body,
+        birth_date: body.birth_date instanceof DateTime
+          ? body.birth_date
+          : DateTime.fromJSDate(new Date(body.birth_date)),
+      }
+
+      // Chama o service para criar o estudante
+      const student = await this.studentService.registerStudent(studentData)
+
+      return response.status(201).send({
+        message: "Student created successfully",
+        data: student.serialize(),
+      })
+    } catch (error: any) {
+      // Erros de validação
+      if (error.messages) {
+        return response.status(422).send({
+          message: "Validation failed",
+          errors: error.messages,
+        })
+      }
+
+      // Outros erros
+      return response.status(400).send({
+        message: error.message || "Erro ao criar estudante",
+      })
+    }
+  }
+}*/
+
+
+
+
+
+/*import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Allotment from 'App/Models/Allotmet'
+import Students from 'App/Models/Students'
+import StudantValidator from 'App/Validators/StudantValidator'
 
 export default class StudantsController {
   public async store({ request, response }: HttpContextContract) {
@@ -134,7 +288,7 @@ export default class StudantsController {
         })),
     };
 }
-}
+}*/
 
 
 

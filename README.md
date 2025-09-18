@@ -23,7 +23,11 @@
    ```sh
    npm install
    ```
-4. Inicie o servidor de desenvolvimento:
+4. Criar a tabela:
+   ```sh
+   node ace migration:run
+   ```
+5. Inicie o servidor de desenvolvimento:
    ```sh
    npm run dev
    ```
